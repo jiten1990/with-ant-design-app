@@ -1,7 +1,6 @@
-import Header from '../header'
-//import Footer from '../components/footer'
-import Meta from '../meta'
-import Container from '../container'
+import Header from '../components/header'
+import Meta from '../components/meta'
+import Container from '../components/container'
 import { Layout } from 'antd';
 const { Content, Footer } = Layout;
 

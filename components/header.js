@@ -1,6 +1,5 @@
 import { Menu } from 'antd';
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
-const { SubMenu } = Menu;
 import Link from 'next/link'
 
 export default function Header() {
