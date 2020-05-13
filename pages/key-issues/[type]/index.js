@@ -10,7 +10,7 @@ import { RichText } from 'prismic-reactjs'
 
 export default function keyissues({ keyIssues , issueCategory}) {
   const router = useRouter()
-  if (!router.isFallback && !keyIssues && !issueCategory) {
+  if (!router.isFallback && !keyIssues) {
     return <ErrorPage statusCode={404} />
   }
     return (
@@ -75,14 +75,13 @@ export default function keyissues({ keyIssues , issueCategory}) {
   export async function getStaticProps({ params }) {
     let preview = {};
 
-    //const issueCategory = await getKeyIssuesCategoryBySlug(preview, params.type)
     const issueCategory = await getKeyIssuesCategoryById(preview, params.type)
 
     // if(issueCategory._meta.id){
-      const keyIssues = await getKeyIssuesByType(preview, params.type)
-      return {
-        props: { keyIssues, issueCategory },
-      }
+    const keyIssues = await getKeyIssuesByType(preview, params.type)
+    return {
+      props: { keyIssues, issueCategory },
+    }
     // }
     // else{
     //   return {
@@ -100,7 +99,7 @@ export default function keyissues({ keyIssues , issueCategory}) {
     if(keyIssues){
         keyIssues.map(({node}) => {
             if(node._meta.uid){
-                staticpaths.push(`/key-issues/${node.keyIssueCategory._meta.id}/`)
+                staticpaths.push(`/key-issues/${node.keyIssueCategory._meta.uid}/`)
             }
         })
     }
