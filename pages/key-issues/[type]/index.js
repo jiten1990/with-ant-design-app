@@ -1,7 +1,7 @@
 import ErrorPage from 'next/error'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { getKeyIssuesByType, getKeyIssuesCategoryBySlug, getAllKeyIssues } from '../../../lib/api'
+import { getKeyIssuesByType, getKeyIssuesCategoryById, getAllKeyIssues } from '../../../lib/api'
 import MasterLayout from '../../../components/masterlayout'
 import SubContainer from '../../../components/SubContainer'
 import SidebarLink from '../../../components/SidebarLink'
@@ -75,19 +75,20 @@ export default function keyissues({ keyIssues , issueCategory}) {
   export async function getStaticProps({ params }) {
     let preview = {};
 
-    const issueCategory = await getKeyIssuesCategoryBySlug(preview, params.type)
+    //const issueCategory = await getKeyIssuesCategoryBySlug(preview, params.type)
+    const issueCategory = await getKeyIssuesCategoryById(preview, params.type)
 
-    if(issueCategory._meta.id){
-      const keyIssues = await getKeyIssuesByType(preview, issueCategory._meta.id)
+    // if(issueCategory._meta.id){
+      const keyIssues = await getKeyIssuesByType(preview, params.type)
       return {
         props: { keyIssues, issueCategory },
       }
-    }
-    else{
-      return {
-        props : {},
-      }
-    }
+    // }
+    // else{
+    //   return {
+    //     props : {},
+    //   }
+    // }
   }
   
   export async function getStaticPaths() {
@@ -99,7 +100,7 @@ export default function keyissues({ keyIssues , issueCategory}) {
     if(keyIssues){
         keyIssues.map(({node}) => {
             if(node._meta.uid){
-                staticpaths.push(`/key-issues/${node.keyIssueCategory._meta.uid}/`)
+                staticpaths.push(`/key-issues/${node.keyIssueCategory._meta.id}/`)
             }
         })
     }
