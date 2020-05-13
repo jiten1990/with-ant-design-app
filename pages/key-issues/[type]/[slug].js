@@ -15,56 +15,61 @@ export default function keyissues({ keyIssues , issueCategory, keyIssuesAll}) {
   }
   else{
 
-    return (
-      <MasterLayout>
-        <SubContainer>
-          <Row>
-            <Col span="20">
-              <Card>
-                <Row>
-                  <Col span="19">
-                      <div className="post-banner">
-                          <img alt={keyIssues[0].node.title} src={keyIssues[0].node.coverimage.url} />
-                      </div>
-                      <div className="post-title">
-                          <RichText render={keyIssues[0].node.title} />
-                      </div>
-                      <RichText render={keyIssues[0].node.content} />
-                  </Col>  
-                </Row>
-              </Card>  
-            </Col>
-            <Col span="8" className="sideBarPositioned">
-
-              <div className="sideBarWrap">
-
-                  <h1 className="text-center">{issueCategory.category}</h1>
-
-                  <div className="keyissuesBoxWrap">
-                    
-                    {keyIssuesAll.map(issue => (
-                      <ul>
-                      <SidebarLink
-                        active_slug={keyIssues[0].node._meta.uid}
-                        key={issue.node._meta.uid}
-                        title={issue.node.title}
-                        slug={issue.node._meta.uid}
-                        category_slug={issue.node.keyIssueCategory._meta.uid}
-                        category={issue.node.keyIssueCategory.category}
-                      />
-                      </ul>
-                    ))}  
-
-                  </div>  
-
-               </div>   
-
-            </Col>
-    
-          </Row>
-      </SubContainer>  
-    </MasterLayout>
-    )
+    if(keyIssues){
+      return (
+        <MasterLayout>
+          <SubContainer>
+            <Row>
+              <Col span="20">
+                <Card>
+                  <Row>
+                    <Col span="19">
+                        <div className="post-banner">
+                            <img alt={keyIssues[0].node.title} src={keyIssues[0].node.coverimage.url} />
+                        </div>
+                        <div className="post-title">
+                            <RichText render={keyIssues[0].node.title} />
+                        </div>
+                        <RichText render={keyIssues[0].node.content} />
+                    </Col>  
+                  </Row>
+                </Card>  
+              </Col>
+              <Col span="8" className="sideBarPositioned">
+  
+                <div className="sideBarWrap">
+  
+                    <h1 className="text-center">{issueCategory.category}</h1>
+  
+                    <div className="keyissuesBoxWrap">
+                      
+                      {keyIssuesAll.map(issue => (
+                        <ul>
+                        <SidebarLink
+                          active_slug={keyIssues[0].node._meta.uid}
+                          key={issue.node._meta.uid}
+                          title={issue.node.title}
+                          slug={issue.node._meta.uid}
+                          category_slug={issue.node.keyIssueCategory._meta.uid}
+                          category={issue.node.keyIssueCategory.category}
+                        />
+                        </ul>
+                      ))}  
+  
+                    </div>  
+  
+                 </div>   
+  
+              </Col>
+      
+            </Row>
+        </SubContainer>  
+      </MasterLayout>
+      )
+    }
+    else{
+      return "Loading..."
+    }
   }
   
 }
