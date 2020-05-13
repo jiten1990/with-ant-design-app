@@ -99,7 +99,7 @@ export default function keyissues({ keyIssues , issueCategory}) {
     if(keyIssues){
         keyIssues.map(({node}) => {
             if(node._meta.uid){
-                staticpaths.push(`/key-issues/${node.keyIssueCategory._meta.uid}/`)
+                staticpaths.push(`/key-issues/${node.keyIssueCategory._meta.id}/`)
             }
         })
     }
