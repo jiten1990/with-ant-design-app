@@ -30,14 +30,3 @@ export async function getStaticProps({ preview, previewData }) {
     props: { keyIssues },
   }
 }
-
-export async function getStaticPaths() {
-
-  const keyIssues = await getAllKeyIssueTypes()
-  let staticpaths = [];
-  staticpaths.push(`/key-issues/`)
-  return {
-      paths: staticpaths,
-      fallback: true,
-  }
-}
