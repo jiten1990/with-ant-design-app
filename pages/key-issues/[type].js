@@ -8,6 +8,7 @@ import SidebarLink from '../../components/SidebarLink'
 import {Col, Row, Card} from "antd"
 import { RichText } from 'prismic-reactjs'
 
+
 export default function keyissues({ keyIssues , issueCategory}) {
   const router = useRouter()
   if (!router.isFallback && !keyIssues) {
@@ -23,7 +24,7 @@ export default function keyissues({ keyIssues , issueCategory}) {
   
           <SubContainer>
             <Row>
-              <Col span="20">
+              {/* <Col span="20">
                 <Card>
                   <Row>
                     <Col span="19">
@@ -63,7 +64,7 @@ export default function keyissues({ keyIssues , issueCategory}) {
   
                  </div>   
   
-              </Col>
+              </Col> */}
       
             </Row>
         </SubContainer>
