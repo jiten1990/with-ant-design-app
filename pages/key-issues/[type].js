@@ -13,6 +13,7 @@ export default function keyissues({ keyIssues , issueCategory}) {
   if (!router.isFallback && !keyIssues) {
     return <ErrorPage statusCode={404} />
   }
+  else{
     return (
 
       <MasterLayout>
@@ -69,8 +70,9 @@ export default function keyissues({ keyIssues , issueCategory}) {
       </SubContainer>
       )}  
     </MasterLayout>
-    )
+    ) 
   }
+}
 
   export async function getStaticProps({ params }) {
     let preview = {};

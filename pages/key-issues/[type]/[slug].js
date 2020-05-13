@@ -12,7 +12,6 @@ export default function keyissues({ keyIssues , issueCategory, keyIssuesAll}) {
     return <ErrorPage statusCode={404} />
   }
   else{
-
     return (
       <MasterLayout>
         <SubContainer>
