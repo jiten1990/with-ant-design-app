@@ -77,6 +77,8 @@ export default function keyissues({ keyIssues , issueCategory}) {
 
     const issueCategory = await getKeyIssuesCategoryById(preview, params.type)
 
+    console.log(issueCategory, "issue category");
+
     // if(issueCategory._meta.id){
     const keyIssues = await getKeyIssuesByType(preview, params.type)
     return {
