@@ -10,7 +10,7 @@ import { RichText } from 'prismic-reactjs'
 
 export default function keyissues({ keyIssues , issueCategory}) {
   const router = useRouter()
-  if (!router.isFallback && !keyIssues) {
+  if (!router.isFallback && !keyIssues && !issueCategory) {
     return <ErrorPage statusCode={404} />
   }
     return (
