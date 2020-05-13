@@ -8,10 +8,11 @@ import {Col, Row, Card} from "antd"
 import { RichText } from 'prismic-reactjs'
 
 export default function keyissues({ keyIssues , issueCategory, keyIssuesAll}) {
-  if (!keyIssues) {
+  if (!router.isFallback && !keyIssues) {
     return <ErrorPage statusCode={404} />
   }
   else{
+
     return (
       <MasterLayout>
         <SubContainer>

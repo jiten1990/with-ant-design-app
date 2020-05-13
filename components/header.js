@@ -1,5 +1,5 @@
 import { Menu } from 'antd';
-import { MailOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons';
 import Link from 'next/link'
 
 export default function Header() {
