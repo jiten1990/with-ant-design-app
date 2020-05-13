@@ -12,7 +12,7 @@ export default ({ keyIssues }) => (
       {keyIssues.map(issue => (
 
         <p>
-          <Link as={`/key-issues/${issue.node._meta.id}`} href="/key-issues/[issue.node._meta.id]">
+          <Link as={`/key-issues/${issue.node._meta.uid}`} href="/key-issues/[issue.node._meta.uid]">
             <a className="hover:underline">
               {issue.node.category}
             </a>
