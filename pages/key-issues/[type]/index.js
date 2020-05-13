@@ -1,6 +1,6 @@
 import ErrorPage from 'next/error'
 import React from 'react'
-import { getKeyIssuesByType, getAllKeyIssueTypes, getKeyIssuesCategoryBySlug, getAllKeyIssues } from '../../../lib/api'
+import { getKeyIssuesByType, getKeyIssuesCategoryBySlug, getAllKeyIssues } from '../../../lib/api'
 import MasterLayout from '../../../components/masterlayout'
 import SubContainer from '../../../components/SubContainer'
 import SidebarLink from '../../../components/SidebarLink'
