@@ -1,4 +1,5 @@
 import ErrorPage from 'next/error'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { getKeyIssuesByType, getKeyIssuesCategoryBySlug, getAllKeyIssues } from '../../../lib/api'
 import MasterLayout from '../../../components/masterlayout'
@@ -8,13 +9,18 @@ import {Col, Row, Card} from "antd"
 import { RichText } from 'prismic-reactjs'
 
 export default function keyissues({ keyIssues , issueCategory}) {
-  if (!keyIssues || !issueCategory) {
+  const router = useRouter()
+  if (!router.isFallback && !keyIssues) {
     return <ErrorPage statusCode={404} />
   }
-  else{
-
     return (
+
       <MasterLayout>
+
+      {router.isFallback ? (
+        <div>Loading…</div>
+      ) : (
+
         <SubContainer>
           <Row>
             <Col span="20">
@@ -60,12 +66,11 @@ export default function keyissues({ keyIssues , issueCategory}) {
             </Col>
     
           </Row>
-      </SubContainer>  
+      </SubContainer>
+      )}  
     </MasterLayout>
     )
   }
-  
-}
 
   export async function getStaticProps({ params }) {
     let preview = {};
