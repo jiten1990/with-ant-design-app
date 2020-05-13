@@ -1,10 +1,10 @@
 import ErrorPage from 'next/error'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { getKeyIssuesByType, getKeyIssuesCategoryById, getAllKeyIssues } from '../../../lib/api'
-import MasterLayout from '../../../components/masterlayout'
-import SubContainer from '../../../components/SubContainer'
-import SidebarLink from '../../../components/SidebarLink'
+import { getKeyIssuesByType, getKeyIssuesCategoryById, getAllKeyIssues } from '../../lib/api'
+import MasterLayout from '../../components/masterlayout'
+import SubContainer from '../../components/SubContainer'
+import SidebarLink from '../../components/SidebarLink'
 import {Col, Row, Card} from "antd"
 import { RichText } from 'prismic-reactjs'
 
