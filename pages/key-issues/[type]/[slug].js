@@ -1,4 +1,5 @@
 import ErrorPage from 'next/error'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { getKeyIssuesBySlug, getAllKeyIssues, getKeyIssuesCategoryBySlug, getKeyIssuesByType } from '../../../lib/api'
 import MasterLayout from '../../../components/masterlayout'
@@ -8,6 +9,7 @@ import {Col, Row, Card} from "antd"
 import { RichText } from 'prismic-reactjs'
 
 export default function keyissues({ keyIssues , issueCategory, keyIssuesAll}) {
+  const router = useRouter()
   if (!router.isFallback && !keyIssues) {
     return <ErrorPage statusCode={404} />
   }
