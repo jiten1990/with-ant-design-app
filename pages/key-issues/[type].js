@@ -24,7 +24,7 @@ export default function keyissues({ keyIssues , issueCategory}) {
   
           <SubContainer>
             <Row>
-              {/* <Col span="20">
+              <Col span="20">
                 <Card>
                   <Row>
                     <Col span="19">
@@ -64,7 +64,7 @@ export default function keyissues({ keyIssues , issueCategory}) {
   
                  </div>   
   
-              </Col> */}
+              </Col>
       
             </Row>
         </SubContainer>
@@ -100,18 +100,22 @@ export default function keyissues({ keyIssues , issueCategory}) {
 
     const keyIssues = await getAllKeyIssues()
 
-    let staticpaths = [];
+    // let staticpaths = [];
     
-    if(keyIssues){
-        keyIssues.map(({node}) => {
-            if(node._meta.uid){
-                staticpaths.push(`/key-issues/${node.keyIssueCategory._meta.uid}/`)
-            }
-        })
-    }
+    // if(keyIssues){
+    //     keyIssues.map(({node}) => {
+    //         if(node._meta.uid){
+    //             staticpaths.push(`/key-issues/${node.keyIssueCategory._meta.uid}/`)
+    //         }
+    //     })
+    // }
+
+    const paths = keyIssues.map(({node}) => {
+       return { params: { type: node.keyIssueCategory._meta.uid } };
+    });
 
     return {
-        paths: staticpaths,
+        paths,
         fallback: true,
     }
 
