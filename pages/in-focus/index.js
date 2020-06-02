@@ -22,7 +22,7 @@ function Infocus({data, total, current_page}) {
 
         <p>Found {total.allInFocusTotal} records</p>
 
-        <Card title="In Focus | Page {current_page.current_page}" bordered={false}>
+        <Card title="In Focus" bordered={false}>
         <Row>
           {allInFocus.map(infocus => (
               <Col span={8}>
