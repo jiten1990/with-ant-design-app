@@ -1,14 +1,13 @@
 import React from 'react'
-import Router from 'next/router'
-import { useRouter } from 'next/router'
+import { Router, useRouter } from 'next/router'
 import MasterLayout from '../../components/masterlayout'
 import { getPaginatedInFocus} from '../../lib/api'
 import base64 from 'react-native-base64'
 import {Card, Pagination, Row, Col} from "antd"
-import Link from 'next/link'
 import { RichText } from 'prismic-reactjs'
 
 function Infocus({data, total, current_page}) {
+
   const router = useRouter();  
 
   let allInFocus = data.allInFocus;
@@ -17,32 +16,43 @@ function Infocus({data, total, current_page}) {
     Router.push('/in-focus?page='+pageNumber).then(() => window.scrollTo(0, 0));
   }
 
-  return (
-    <MasterLayout>
+  if (!router.isFallback && !data) {
+    return <ErrorPage statusCode={404} />
+  }
+  else{
+    if(data){
+        return (
+          <MasterLayout>
+      
+              <p>Found {total.allInFocusTotal} records</p>
+      
+              <Card title="In Focus" bordered={false}>
+              <Row>
+                {allInFocus.map(infocus => (
+                    <Col span={8}>
+                      <div className="infocusListWrap">
+                        <div className="post-banner">
+                          <img alt={infocus.node.title} src={infocus.node.banner.url} />
+                        </div>
+                        <div>
+                          <RichText render={infocus.node.title} />
+                        </div>
+                      </div>  
+                    </Col>  
+                ))}        
+              </Row>
+              </Card>
+        
+              <Pagination onChange={onChange} defaultCurrent={current_page.current_page} total={total.allInFocusTotal} />  
+      
+          </MasterLayout>
+        )
+    }
+    else{
+      return ("Loading.....");
+    }
+  }
 
-        <p>Found {total.allInFocusTotal} records</p>
-
-        <Card title="In Focus" bordered={false}>
-        <Row>
-          {allInFocus.map(infocus => (
-              <Col span={8}>
-                <div className="infocusListWrap">
-                  <div className="post-banner">
-                    <img alt={infocus.node.title} src={infocus.node.banner.url} />
-                  </div>
-                  <div>
-                    <RichText render={infocus.node.title} />
-                  </div>
-                </div>  
-              </Col>  
-          ))}        
-        </Row>
-        </Card>
-  
-        <Pagination onChange={onChange} defaultCurrent={current_page.current_page} total={total.allInFocusTotal} />  
-
-    </MasterLayout>
-  )
 }
 
 Infocus.getInitialProps = async function({query}){
