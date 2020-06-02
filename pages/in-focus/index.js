@@ -56,7 +56,7 @@ function Infocus({data, total, current_page}) {
 
 }
 
-Infocus.getInitialProps = async function({query}){
+Infocus.getInitialProps = async ({query}) => {
 
   try {
     let current_page = query.page;
