@@ -9,13 +9,20 @@ export default function Header() {
     <div>
       
       <Menu  mode="horizontal">
-          <Menu.Item key="mail" icon={<MailOutlined />}>
+          <Menu.Item key="home" icon={<MailOutlined />}>
             Home
           </Menu.Item>
-          <Menu.Item key="app" icon={<AppstoreOutlined />}>
+          <Menu.Item key="key-issues" icon={<AppstoreOutlined />}>
             <Link as={`/key-issues`} href="/key-issues">
               <a className="hover:underline">
                 Key Issues
+              </a>
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="in-focus" icon={<MailOutlined />}>
+            <Link as={`/in-focus`} href="/in-focus">
+              <a className="hover:underline">
+                In Focus
               </a>
             </Link>
           </Menu.Item>

@@ -269,3 +269,9 @@ body {
 .text-disabled {
   color: var(--textColorSecondary) !important;
 }
+.ant-pagination{
+  text-align: center;
+}
+.infocusListWrap{
+  padding: 15px;
+}
