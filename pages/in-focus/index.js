@@ -1,7 +1,7 @@
 import React from 'react'
 import Router from 'next/router'
 import { useRouter } from 'next/router'
-import MasterLayout from '../../components/masterlayout'
+//import MasterLayout from '../../components/masterlayout'
 import { getPaginatedInFocus} from '../../lib/api'
 import base64 from 'react-native-base64'
 import {Card, Pagination, Row, Col} from "antd"
@@ -23,7 +23,7 @@ function Infocus({data, total, current_page}) {
   else{
     if(data){
         return (
-          <MasterLayout>
+          <>
       
               <p>Found {total.allInFocusTotal} records</p>
       
@@ -46,7 +46,7 @@ function Infocus({data, total, current_page}) {
         
               <Pagination onChange={onChange} defaultCurrent={current_page.current_page} total={total.allInFocusTotal} />  
       
-          </MasterLayout>
+          </>
         )
     }
     else{
