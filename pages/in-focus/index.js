@@ -1,3 +1,5 @@
+import 'isomorphic-unfetch'
+
 function Page({ stars }) {
   return <div>Next stars: {stars}</div>
 }
