@@ -12,10 +12,6 @@ function Infocus({data, total, current_page}) {
 
   let allInFocus = data.allInFocus;
   
-  function onChange(pageNumber) {
-    //Router.push('/in-focus?page='+pageNumber).then(() => window.scrollTo(0, 0));
-  }
-
   if (!router.isFallback && !data) {
     return <ErrorPage statusCode={404} />
   }
@@ -43,7 +39,7 @@ function Infocus({data, total, current_page}) {
               </Row>
               </Card>
         
-              <Pagination onChange={onChange} defaultCurrent={current_page.current_page} total={total.allInFocusTotal} />  
+              <Pagination defaultCurrent={current_page.current_page} total={total.allInFocusTotal} />  
       
           </MasterLayout>
         )
