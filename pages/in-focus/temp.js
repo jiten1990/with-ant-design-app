@@ -1,8 +1,5 @@
 import React from 'react'
 import { getPaginatedInFocus} from '../../lib/api'
-import MasterLayout from '../../components/masterlayout'
-import {Card, Pagination, Row, Col} from "antd"
-import { RichText } from 'prismic-reactjs'
 
 function Page({ data }) {
     return <div>Next stars:</div>
