@@ -4,39 +4,9 @@ import MasterLayout from '../../components/masterlayout'
 import {Card, Pagination, Row, Col} from "antd"
 import { RichText } from 'prismic-reactjs'
 
-function Page({data, total, current_page}) {
-
-    console.log(data, "data");
-
-    let allInFocus = data.allInFocus;        
-
-    return (
-        <MasterLayout>
-            
-            <p>Found {total.allInFocusTotal} records</p>
-
-            <Card title="In Focus" bordered={false}>
-            <Row>
-            {allInFocus.map(infocus => (
-                <Col key={infocus.node._meta.id} span={8}>
-                    <div className="infocusListWrap">
-                    <div className="post-banner">
-                        <img alt={infocus.node.title} src={infocus.node.banner.url} />
-                    </div>
-                    <div>
-                        <RichText render={infocus.node.title} />
-                    </div>
-                    </div>  
-                </Col>  
-            ))}        
-            </Row>
-            </Card>
-
-            <Pagination defaultCurrent={current_page.current_page} total={total.allInFocusTotal} />  
-
-        </MasterLayout>
-    )
-}
+function Page({ data }) {
+    return <div>Next stars:</div>
+  }
 
 Page.getInitialProps = async ({query}) => {
 
