@@ -1,6 +1,5 @@
 import React from 'react'
 import { getPaginatedInFocus} from '../../lib/api'
-import MasterLayout from '../../components/masterlayout'
 
 function Page({ data }) {
     return <div>Next stars:</div>
