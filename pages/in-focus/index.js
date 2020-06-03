@@ -1,22 +1,9 @@
 import React from 'react'
-import Router from 'next/router'
-import { useRouter } from 'next/router'
+
 import { getPaginatedInFocus} from '../../lib/api'
 
 function Infocus({data, total, current_page}) {
 
-  const router = useRouter();  
-
-  let allInFocus = data.allInFocus;
-  
-  function onChange(pageNumber) {
-    Router.push('/in-focus?page='+pageNumber).then(() => window.scrollTo(0, 0));
-  }
-
-  if (!router.isFallback && !data) {
-    return <ErrorPage statusCode={404} />
-  }
-  else{
     if(data){
         return (
           <div>Testing</div>
@@ -25,7 +12,6 @@ function Infocus({data, total, current_page}) {
     else{
       return ("Loading.....");
     }
-  }
 
 }
 
