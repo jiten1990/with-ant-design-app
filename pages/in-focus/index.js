@@ -60,7 +60,7 @@ function Infocus({data, total, current_page}) {
 
 }
 
-Infocus.getInitialProps = async ({query}) => {
+Infocus.getInitialProps = ({query}) => {
 
   return {
     data: { },
