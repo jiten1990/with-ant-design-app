@@ -1,6 +1,10 @@
 import React from 'react'
 import { useRouter } from 'next/router'
+import MasterLayout from '../../components/masterlayout'
 import { getPaginatedInFocus} from '../../lib/api'
+import base64 from 'react-native-base64'
+import {Card, Pagination, Row, Col} from "antd"
+import { RichText } from 'prismic-reactjs'
 
 function Infocus({data, total, current_page}) {
 
@@ -9,7 +13,7 @@ function Infocus({data, total, current_page}) {
   let allInFocus = data.allInFocus;
   
   function onChange(pageNumber) {
-    Router.push('/in-focus?page='+pageNumber).then(() => window.scrollTo(0, 0));
+    //Router.push('/in-focus?page='+pageNumber).then(() => window.scrollTo(0, 0));
   }
 
   if (!router.isFallback && !data) {
@@ -18,7 +22,30 @@ function Infocus({data, total, current_page}) {
   else{
     if(data){
         return (
-          <div>Testing</div>
+          <MasterLayout>
+      
+              <p>Found {total.allInFocusTotal} records</p>
+      
+              <Card title="In Focus" bordered={false}>
+              <Row>
+                {allInFocus.map(infocus => (
+                    <Col span={8}>
+                      <div className="infocusListWrap">
+                        <div className="post-banner">
+                          <img alt={infocus.node.title} src={infocus.node.banner.url} />
+                        </div>
+                        <div>
+                          <RichText render={infocus.node.title} />
+                        </div>
+                      </div>  
+                    </Col>  
+                ))}        
+              </Row>
+              </Card>
+        
+              <Pagination onChange={onChange} defaultCurrent={current_page.current_page} total={total.allInFocusTotal} />  
+      
+          </MasterLayout>
         )
     }
     else{
