@@ -22,7 +22,11 @@ function Infocus({data, total, current_page}) {
   else{
     if(data){
 
-        let allInFocus = data.allInFocus;
+        let allInFocus = [];
+
+        if(data.allInFocus){
+          this.allInFocus = data.allInFocus;
+        }
 
         return (
           <MasterLayout>
@@ -32,7 +36,7 @@ function Infocus({data, total, current_page}) {
               <Card title="In Focus" bordered={false}>
               <Row>
                 {allInFocus.map(infocus => (
-                    <Col span={8}>
+                    <Col key={infocus.node._meta.id} span={8}>
                       <div className="infocusListWrap">
                         <div className="post-banner">
                           <img alt={infocus.node.title} src={infocus.node.banner.url} />
@@ -58,30 +62,36 @@ function Infocus({data, total, current_page}) {
 
 }
 
-// Infocus.getInitialProps = async ({query}) => {
+Infocus.getInitialProps = async ({query}) => {
 
-//     try {
-//       let current_page = query.page;
-//       let page = query.page ? (query.page-1) : 0;
-//       let limit = 7;
-//       let after  = base64.encode("arrayconnection:"+((page*limit)-1));
-//       const allInFocusMain = await getPaginatedInFocus(after, limit);
-//       const allInFocus = allInFocusMain.edges;
-//       const allInFocusTotal = allInFocusMain.totalCount;
+    // try {
+    //   let current_page = query.page;
+    //   let page = query.page ? (query.page-1) : 0;
+    //   let limit = 7;
+    //   let after  = base64.encode("arrayconnection:"+((page*limit)-1));
+    //   const allInFocusMain = await getPaginatedInFocus(after, limit);
+    //   const allInFocus = allInFocusMain.edges;
+    //   const allInFocusTotal = allInFocusMain.totalCount;
     
-//       return {
-//         data: { allInFocus },
-//         total : {allInFocusTotal },
-//         current_page : {current_page}
-//       }
-//     } catch (error) {
-//       return {
-//         data: { },
-//         total : { },
-//         current_page : { }
-//       };
-//     }
+    //   return {
+    //     data: { allInFocus },
+    //     total : {allInFocusTotal },
+    //     current_page : {current_page}
+    //   }
+    // } catch (error) {
+    //   return {
+    //     data: { },
+    //     total : { },
+    //     current_page : { }
+    //   };
+    // }
+
+    return {
+      data: { },
+      total : { },
+      current_page : { }
+    };
     
-// }
+}
 
 export default Infocus
