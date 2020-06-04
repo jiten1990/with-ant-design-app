@@ -57,7 +57,7 @@ function Infocus({data, total, current_page}) {
 
 }
 
-Infocus.getInitialProps = async ({query}) => {
+export async function getServerSideProps({ query }) {
 
   const current_page = query.page;
   const page = query.page ? (query.page-1) : 0;
