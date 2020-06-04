@@ -11,19 +11,11 @@ function Infocus() {
 
   //let allInFocus = data.allInFocus;
 
-  if (!router.isFallback && !data) {
-    return <ErrorPage statusCode={404} />
-  }
-  else{
-    if(data){
-        return (
-          <p>Found test records</p>
-        )
-    }
-    else{
-      return ("Loading.....");
-    }
-  }
+    
+      return (
+        <p>Found test records</p>
+      )
+   
 
 }
 
