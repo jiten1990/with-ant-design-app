@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { getPaginatedInFocus} from '../../lib/api'
 import base64 from 'react-native-base64'
 
-function Infocus({data, total, current_page}) {
+function Infocus() {
 
   const router = useRouter();  
 
@@ -17,7 +17,7 @@ function Infocus({data, total, current_page}) {
   else{
     if(data){
         return (
-          <p>Found {total} records</p>
+          <p>Found test records</p>
         )
     }
     else{
@@ -27,33 +27,33 @@ function Infocus({data, total, current_page}) {
 
 }
 
-Infocus.getInitialProps = async ({query}) => {
+// Infocus.getInitialProps = async ({query}) => {
 
-  let current_page = query.page;
+//   let current_page = query.page;
 
-  try {
+//   try {
     
-    let page = query.page ? (query.page-1) : 0;
-    let limit = 7;
-    let after  = base64.encode("arrayconnection:"+((page*limit)-1));
-    const allInFocusMain = await getPaginatedInFocus(after, limit);
-    const allInFocus = allInFocusMain.edges;
-    const allInFocusTotal = allInFocusMain.totalCount;
+//     let page = query.page ? (query.page-1) : 0;
+//     let limit = 7;
+//     let after  = base64.encode("arrayconnection:"+((page*limit)-1));
+//     const allInFocusMain = await getPaginatedInFocus(after, limit);
+//     const allInFocus = allInFocusMain.edges;
+//     const allInFocusTotal = allInFocusMain.totalCount;
   
-    return {
-      data: allInFocus ,
-      total : allInFocusTotal ,
-      current_page
-    }
-  } catch (error) {
-    return {
-      data: [],
-      total : 0,
-      current_page
-    };
-  }
+//     return {
+//       data: allInFocus ,
+//       total : allInFocusTotal ,
+//       current_page
+//     }
+//   } catch (error) {
+//     return {
+//       data: [],
+//       total : 0,
+//       current_page
+//     };
+//   }
 
   
-}
+// }
 
 export default Infocus
