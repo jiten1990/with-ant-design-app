@@ -24,30 +24,7 @@ function Infocus({data, total, current_page}) {
   else{
     if(data){
         return (
-          <MasterLayout>
-      
-              <p>Found {total} records</p>
-      
-              <Card title="In Focus" bordered={false}>
-              <Row>
-                {data.map(infocus => (
-                    <Col span={8}>
-                      <div className="infocusListWrap">
-                        <div className="post-banner">
-                          <img alt={infocus.node.title} src={infocus.node.banner.url} />
-                        </div>
-                        <div>
-                          <RichText render={infocus.node.title} />
-                        </div>
-                      </div>  
-                    </Col>  
-                ))}        
-              </Row>
-              </Card>
-        
-              <Pagination onChange={onChange} defaultCurrent={current_page} total={total} />  
-      
-          </MasterLayout>
+          <p>Found {total} records</p>
         )
     }
     else{
