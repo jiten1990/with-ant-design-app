@@ -1,10 +1,10 @@
 import React from 'react'
-import Router from 'next/router'
+//import Router from 'next/router'
 import { useRouter } from 'next/router'
 import MasterLayout from '../../components/masterlayout'
 import { getPaginatedInFocus} from '../../lib/api'
 import base64 from 'react-native-base64'
-import {Card, Pagination, Row, Col} from "antd"
+import {Card, Row, Col} from "antd"
 import { RichText } from 'prismic-reactjs'
 import ErrorPage from 'next/error'
 
@@ -12,15 +12,15 @@ function Infocus({data, total, current_page}) {
 
   const router = useRouter();  
 
-  function onChange(pageNumber) {
-    Router.push('/in-focus?page='+pageNumber).then(() => window.scrollTo(0, 0));
-  }
+  // function onChange(pageNumber) {
+  //   Router.push('/in-focus?page='+pageNumber).then(() => window.scrollTo(0, 0));
+  // }
 
-  if (!router.isFallback && !data) {
-    return <ErrorPage statusCode={404} />
-  }
-  else{
-    if(data){
+  // if (!router.isFallback && !data) {
+  //   return <ErrorPage statusCode={404} />
+  // }
+  // else{
+  //   if(data){
         return (
           <MasterLayout>
       
@@ -43,15 +43,15 @@ function Infocus({data, total, current_page}) {
               </Row>
               </Card>
         
-              <Pagination onChange={onChange} defaultCurrent={current_page} total={total} />  
+              {/* <Pagination onChange={onChange} defaultCurrent={current_page} total={total} />   */}
       
           </MasterLayout>
         )
-    }
-    else{
-      return ("Loading.....");
-    }
-  }
+  //   }
+  //   else{
+  //     return ("Loading.....");
+  //   }
+  // }
 
 }
 
