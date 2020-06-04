@@ -2,21 +2,14 @@ import ErrorPage from 'next/error'
 import React from 'react'
 import Router from 'next/router'
 import { useRouter } from 'next/router'
-import MasterLayout from '../../components/masterlayout'
 import { getPaginatedInFocus} from '../../lib/api'
 import base64 from 'react-native-base64'
-import {Card, Pagination, Row, Col} from "antd"
-import { RichText } from 'prismic-reactjs'
 
 function Infocus({data, total, current_page}) {
 
   const router = useRouter();  
 
   //let allInFocus = data.allInFocus;
-  
-  function onChange(pageNumber) {
-    Router.push('/in-focus?page='+pageNumber).then(() => window.scrollTo(0, 0));
-  }
 
   if (!router.isFallback && !data) {
     return <ErrorPage statusCode={404} />
