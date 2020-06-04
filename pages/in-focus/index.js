@@ -1,10 +1,9 @@
-import ErrorPage from 'next/error'
 import React from 'react'
-//import Router from 'next/router'
+import Router from 'next/router'
 import { useRouter } from 'next/router'
 import MasterLayout from '../../components/masterlayout'
-import { getAllInfocus } from '../../lib/api'
-// import base64 from 'react-native-base64'
+import { getPaginatedInFocus} from '../../lib/api'
+import base64 from 'react-native-base64'
 import {Card, Pagination, Row, Col} from "antd"
 import { RichText } from 'prismic-reactjs'
 
@@ -12,11 +11,11 @@ function Infocus({data, total, current_page}) {
 
   const router = useRouter();  
 
-  //let allInFocus = data.allInFocus;
+  let allInFocus = data.allInFocus;
   
-  // function onChange(pageNumber) {
-  //   Router.push('/in-focus?page='+pageNumber).then(() => window.scrollTo(0, 0));
-  // }
+  function onChange(pageNumber) {
+    Router.push('/in-focus?page='+pageNumber).then(() => window.scrollTo(0, 0));
+  }
 
   if (!router.isFallback && !data) {
     return <ErrorPage statusCode={404} />
@@ -26,12 +25,12 @@ function Infocus({data, total, current_page}) {
         return (
           <MasterLayout>
       
-              {/* <p>Found {total} records</p> */}
+              <p>Found {total.allInFocusTotal} records</p>
       
               <Card title="In Focus" bordered={false}>
               <Row>
-                {data.map(infocus => (
-                    <Col key={infocus.node._meta.id} span={8}>
+                {allInFocus.map(infocus => (
+                    <Col span={8}>
                       <div className="infocusListWrap">
                         <div className="post-banner">
                           <img alt={infocus.node.title} src={infocus.node.banner.url} />
@@ -45,7 +44,7 @@ function Infocus({data, total, current_page}) {
               </Row>
               </Card>
         
-              {/* <Pagination onChange={onChange} defaultCurrent={current_page} total={total} />   */}
+              <Pagination onChange={onChange} defaultCurrent={current_page.current_page} total={total.allInFocusTotal} />  
       
           </MasterLayout>
         )
@@ -57,24 +56,31 @@ function Infocus({data, total, current_page}) {
 
 }
 
-export async function getServerSideProps() {
+Infocus.getInitialProps = async ({query}) => {
 
-  // const current_page = query.page;
-  // const page = query.page ? (query.page-1) : 0;
-  // const limit = 7;
-  // const after  = base64.encode("arrayconnection:"+((page*limit)-1));
-  // const allInFocusMain = await getPaginatedInFocus(after, limit);
-  // const allInFocus = allInFocusMain.edges;
-  // const allInFocusTotal = allInFocusMain.totalCount;
-
-  const allInFocus = await getAllInfocus();
-
-  return {
-    props: {
-      data : allInFocus
+  try {
+    let current_page = query.page;
+    let page = query.page ? (query.page-1) : 0;
+    let limit = 7;
+    let after  = base64.encode("arrayconnection:"+((page*limit)-1));
+    const allInFocusMain = await getPaginatedInFocus(after, limit);
+    const allInFocus = allInFocusMain.edges;
+    const allInFocusTotal = allInFocusMain.totalCount;
+  
+    return {
+      data: { allInFocus },
+      total : {allInFocusTotal },
+      current_page : {current_page}
     }
+  } catch (error) {
+    return {
+      data: { },
+      total : { },
+      current_page : { }
+    };
   }
 
+  
 }
 
 export default Infocus
