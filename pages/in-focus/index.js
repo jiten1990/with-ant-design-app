@@ -1,17 +1,21 @@
 import React from 'react'
+import Router from 'next/router'
 import { useRouter } from 'next/router'
 import MasterLayout from '../../components/masterlayout'
 import { getPaginatedInFocus} from '../../lib/api'
 import base64 from 'react-native-base64'
 import {Card, Pagination, Row, Col} from "antd"
 import { RichText } from 'prismic-reactjs'
+import ErrorPage from 'next/error'
 
 function Infocus({data, total, current_page}) {
 
   const router = useRouter();  
 
-  let allInFocus = data.allInFocus;
-  
+  function onChange(pageNumber) {
+    Router.push('/in-focus?page='+pageNumber).then(() => window.scrollTo(0, 0));
+  }
+
   if (!router.isFallback && !data) {
     return <ErrorPage statusCode={404} />
   }
@@ -20,12 +24,12 @@ function Infocus({data, total, current_page}) {
         return (
           <MasterLayout>
       
-              <p>Found {total.allInFocusTotal} records</p>
+              <p>Found {total} records</p>
       
               <Card title="In Focus" bordered={false}>
               <Row>
-                {allInFocus.map(infocus => (
-                    <Col span={8}>
+                {data.map(infocus => (
+                    <Col key={infocus.node._meta.id} span={8}>
                       <div className="infocusListWrap">
                         <div className="post-banner">
                           <img alt={infocus.node.title} src={infocus.node.banner.url} />
@@ -39,7 +43,7 @@ function Infocus({data, total, current_page}) {
               </Row>
               </Card>
         
-              <Pagination defaultCurrent={current_page.current_page} total={total.allInFocusTotal} />  
+              <Pagination onChange={onChange} defaultCurrent={current_page} total={total} />  
       
           </MasterLayout>
         )
@@ -51,9 +55,8 @@ function Infocus({data, total, current_page}) {
 
 }
 
-Infocus.getInitialProps = async ({query}) => {
+export async function getServerSideProps({ query }) {
 
-  try {
     let current_page = query.page;
     let page = query.page ? (query.page-1) : 0;
     let limit = 7;
@@ -63,18 +66,12 @@ Infocus.getInitialProps = async ({query}) => {
     const allInFocusTotal = allInFocusMain.totalCount;
   
     return {
-      data: { allInFocus },
-      total : {allInFocusTotal },
-      current_page : {current_page}
+      props: {
+          data: allInFocus,
+          total: allInFocusTotal,
+          current_page
+      }
     }
-  } catch (error) {
-    return {
-      data: { },
-      total : { },
-      current_page : { }
-    };
-  }
-
   
 }
 
