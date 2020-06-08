@@ -1,3 +1,4 @@
+import ErrorPage from 'next/error'
 import React from 'react'
 import Router from 'next/router'
 import { useRouter } from 'next/router'
@@ -10,11 +11,10 @@ import { RichText } from 'prismic-reactjs'
 function Infocus({data, total, current_page}) {
 
   const router = useRouter();  
-
-  let allInFocus = data.allInFocus;
+  //let allInFocus = data.allInFocus;
   
   function onChange(pageNumber) {
-    Router.push('/in-focus?page='+pageNumber).then(() => window.scrollTo(0, 0));
+    Router.push('/in-focus/page/'+pageNumber).then(() => window.scrollTo(0, 0));
   }
 
   if (!router.isFallback && !data) {
@@ -25,11 +25,11 @@ function Infocus({data, total, current_page}) {
         return (
           <MasterLayout>
       
-              <p>Found {total.allInFocusTotal} records</p>
+              <p>Found {total} records</p>
       
               <Card title="In Focus" bordered={false}>
               <Row>
-                {allInFocus.map(infocus => (
+                {data.map(infocus => (
                     <Col span={8}>
                       <div className="infocusListWrap">
                         <div className="post-banner">
@@ -44,7 +44,7 @@ function Infocus({data, total, current_page}) {
               </Row>
               </Card>
         
-              <Pagination onChange={onChange} defaultCurrent={current_page.current_page} total={total.allInFocusTotal} />  
+              <Pagination onChange={onChange} defaultCurrent={current_page} total={total} />  
       
           </MasterLayout>
         )
@@ -56,30 +56,26 @@ function Infocus({data, total, current_page}) {
 
 }
 
-Infocus.getInitialProps = async ({query}) => {
+export async function getStaticProps({ params }) {
 
-  try {
-    let current_page = query.page;
-    let page = query.page ? (query.page-1) : 0;
+    let current_page = 1; 
+    if(params && params.page){
+      current_page = params.page;
+    }
+    let page = current_page;
     let limit = 7;
     let after  = base64.encode("arrayconnection:"+((page*limit)-1));
     const allInFocusMain = await getPaginatedInFocus(after, limit);
     const allInFocus = allInFocusMain.edges;
     const allInFocusTotal = allInFocusMain.totalCount;
   
-    return {
-      data: { allInFocus },
-      total : {allInFocusTotal },
-      current_page : {current_page}
+    return { 
+      props: { 
+        data: allInFocus,
+        total : allInFocusTotal,
+        current_page
+      },
     }
-  } catch (error) {
-    return {
-      data: { },
-      total : { },
-      current_page : { }
-    };
-  }
-
   
 }
 
