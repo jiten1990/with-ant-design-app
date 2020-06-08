@@ -62,7 +62,7 @@ export async function getStaticProps({ params }) {
     if(params && params.page){
       current_page = params.page;
     }
-    let page = current_page;
+    let page = current_page-1;
     let limit = 7;
     let after  = base64.encode("arrayconnection:"+((page*limit)-1));
     const allInFocusMain = await getPaginatedInFocus(after, limit);
